@@ -1,4 +1,39 @@
 # EC-CUBE 4.1
+## install
+### 初回時のみ
+```
+$ cp .env.dist .env
+```
+```
+# APP_ENV=prod
+# DATABASE_URL=sqlite:///var/eccube.db
+DATABASE_URL=mysql://dbuser:secret@mysql/eccubedb
+```
+
+### docker
+ローカルディレクトリをマウントする場合
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.mysql.yml -f docker-compose.dev.yml up -d
+```
+
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.mysql.yml up -d
+```
+
+
+```
+$ docker-compose exec -u www-data ec-cube bin/console eccube:install -n
+```
+
+スキーマ作成+初期データ投入
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.mysql.yml exec ec-cube composer run-script compile
+```
+
+
+
+
+
 
 [![Unit test for EC-CUBE](https://github.com/EC-CUBE/ec-cube/actions/workflows/unit-test.yml/badge.svg?branch=4.1)](https://github.com/EC-CUBE/ec-cube/actions/workflows/unit-test.yml)
 [![E2E test for EC-CUBE](https://github.com/EC-CUBE/ec-cube/actions/workflows/e2e-test.yml/badge.svg?branch=4.1)](https://github.com/EC-CUBE/ec-cube/actions/workflows/e2e-test.yml)
@@ -59,7 +94,7 @@ EC-CUBE 4.x 系の仕様や手順、開発Tipsに関するドキュメントを�
 ## 開発への参加
 
 EC-CUBE 4.1の不具合の修正、機能のブラッシュアップを目的として、継続的に開発を行っております。  
-コードのリファクタリング、不具合修正以外のPullRequestを送る際は、Pull Requestのコメントなどに意図を明確に記載してください。  
+コードのリファクタリング、不具合修正以外のPullRequestを送る際は、Pull Requestのコメントなどに意図を明確に記載してください。
 
 Pull Requestの送信前に、Issueにて提議いただく事も可能です。
 Issuesの利用方法については、[こちら](https://github.com/EC-CUBE/ec-cube/wiki/Issues%E3%81%AE%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95)をご確認ください。
